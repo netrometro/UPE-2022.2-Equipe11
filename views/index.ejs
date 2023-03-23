@@ -1,10 +1,47 @@
-<h1><%= name %> Logado com sucesso </hi>
- <div>
- <label>Anotação</label>
- <input type="text">
- <button> Salvar</button>
- </div>
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Quadro de Notas</h1>
+      <h1>Nova nota:</h1>
+    <form action="/" method="post">
+        <input type="number" style="display: none;" 
+               name="noteId">
+        <textarea type="text" rows="6" cols="30" 
+                  placeholder="Escreva nota..." 
+                  name="noteContent"></textarea>
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+
+
+    <div style="display: flex;">
+  
+        <% data.forEach(element=> { %>
+  
+            <form action="/update" method="post">
+                <input type="number" style="display: none;" 
+                       name="noteId" value="<%= element.noteId %>">
+                <textarea type="text" rows="6" cols="30" 
+                          placeholder="Escreva nota..." name="noteContent"
+                    value="<%= element.noteContent %>">
+                      <%= element.noteContent %></textarea>
+                <br>
+                <button type="submit">Salvar</button>
+            </form>
+  
+            <form action="/delete" method="post">
+                <input type="number" style="display: none;" 
+                       name="noteId" value="<%= element.noteId %>">
+                <button type="submit" 
+                        style="margin: 0px 4px;">✕</button>
+            </form>
+            <% }) %>
+    </div>
+</body>
 
 <form action="/logout?_method=DELETE" method="POST">
   <button type="submit"> Logout</button>
 </form>
+  
+</html>

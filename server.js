@@ -9,6 +9,9 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
+
+const notes = [];
 
 const initializePassport = require('./passport-config');
 initializePassport(
@@ -34,8 +37,59 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
 app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index.ejs', { name: req.user.name });
+  res.render('index.ejs', { name: req.user.name, data: notes });
+});
+
+app.post('/', (req, res) => {
+  const noteContent = req.body.noteContent;
+  const noteId = notes.length + 1;
+
+  notes.push({
+    noteId: noteId,
+    noteContent: noteContent,
+  });
+
+  res.render('index.ejs', {
+    data: notes,
+  });
+});
+
+app.post('/update', (req, res) => {
+  var noteId = req.body.noteId;
+  var noteContent = req.body.noteContent;
+
+  notes.forEach((note) => {
+    if (note.noteId == noteId) {
+      note.noteContent = noteContent;
+    }
+  });
+  res.render('index.ejs', {
+    data: notes,
+  });
+});
+
+app.post('/delete', (req, res) => {
+  var noteId = req.body.noteId;
+
+  var j = 0;
+  notes.forEach((note) => {
+    j = j + 1;
+    if (note.noteId == noteId) {
+      notes.splice(j - 1, 1);
+    }
+  });
+
+  res.render('index.ejs', {
+    data: notes,
+  });
 });
 
 app.get('/login', checkNotAuthenticated, (req, res) => {

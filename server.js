@@ -51,6 +51,7 @@ app.get('/', checkAuthenticated, (req, res) => {
 app.post('/', (req, res) => {
   const noteContent = req.body.noteContent;
   const noteId = notes.length + 1;
+  
 
   notes.push({
     noteId: noteId,

@@ -1,21 +1,61 @@
 <!DOCTYPE html>
 <html>
+<body style="background-color:silver;"  >
+<style>
+header {
+  background-color: #666;
+  padding: 5px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  width: 100%;
+}
+
+div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+
+
+}
+
+</style>
 
 <body>
-    <h1>Quadro de Notas</h1>
-      <h1>Nova nota:</h1>
+
+
+ <header>  
+  <h2>Quadro de Notas</h2>
+ </header> 
+ <form action="/logout?_method=DELETE" method="POST">
+  <button type="submit"> Logout</button>
+</form>
+
+      <h1 style="text-align:center;" >Nova nota:</h1>
+  <div>
     <form action="/" method="post">
+    
         <input type="number" style="display: none;" 
-               name="noteId">
-        <textarea type="text" rows="6" cols="30" 
+               name="noteId" >
+        <textarea  type="text" rows="6" cols="30" 
                   placeholder="Escreva nota..." 
-                  name="noteContent"></textarea>
+                  style="text-align:center;"
+                  name="noteContent"></textarea >
         <br>
-        <button type="submit">Salvar</button>
+
+        <button type="submit" >Salvar</button>
+
     </form>
-
-
-    <div style="display: flex;">
+  </div>
+    <div>
   
         <% data.forEach(element=> { %>
   
@@ -27,21 +67,18 @@
                     value="<%= element.noteContent %>">
                       <%= element.noteContent %></textarea>
                 <br>
-                <button type="submit">Salvar</button>
+                <button type="submit">Alterar</button>
             </form>
   
             <form action="/delete" method="post">
                 <input type="number" style="display: none;" 
                        name="noteId" value="<%= element.noteId %>">
-                <button type="submit" 
-                        style="margin: 0px 4px;">✕</button>
+                <button type="submit" >✕</button>
             </form>
             <% }) %>
     </div>
 </body>
 
-<form action="/logout?_method=DELETE" method="POST">
-  <button type="submit"> Logout</button>
-</form>
+
   
 </html>

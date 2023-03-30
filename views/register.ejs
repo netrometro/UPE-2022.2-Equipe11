@@ -1,7 +1,48 @@
-<h1>Register</h1>
+<!DOCTYPE html>
+<html>
+<body style="background-color:silver;"  >
+<style>
+header {
+  background-color: #666;
+  padding: 5px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  width: 100%;
+}
+
+div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+
+
+}
+
+</style>
+
+<body>
+
+
+ <header>  
+  <h2>Quadro de Notas</h2>
+ </header>
+
+<h1 style="text-align:center;">Cadastrar</h1>
+  <div>
+
 <form action="/register" method="POST">
   <div>
-    <label for="name">Name</label>
+    <label for="name">Nome</label>
     <input type="text" id="name" name="name" required>
   </div>
   <div>
@@ -9,9 +50,16 @@
     <input type="email" id="email" name="email" required>
   </div>
   <div>
-    <label for="password">Password</label>
+    <label for="password">Senha</label>
     <input type="password" id="password" name="password" required>
+    
   </div>
-  <button type="submit">Register</button>
-</form>
-<a href="/login">Login</a>
+ <button  type="submit">Register</button>
+ </form>
+ <a href="/login"> <button> Login </button> </a>
+
+</div>
+
+
+
+
